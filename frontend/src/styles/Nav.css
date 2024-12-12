@@ -1,0 +1,30 @@
+.navbar-title {
+  margin-left: 0;
+  font-family: 'Roboto', sans-serif; 
+  font-size: 1.7rem !important; /* Increase size */
+}
+
+.nav-items { 
+  gap: 1.5rem; 
+}
+.nav-subitems{
+  color: grey; 
+}
+.navv{
+  background-color: azure;
+}
+/* Default state: grey text for the Sign Up button */
+.btn-primary.signup-link {
+  color: grey; /* Default text color */
+  background-color: transparent; /* Match other links' background */
+  border: 2px solid grey; /* Optional: Add a border if desired */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
+}
+
+/* Hover state: white text with a primary button background */
+.btn-primary.signup-link:hover {
+  color: white !important; /* White text on hover */
+  background-color: #007bff; /* Standard Bootstrap primary color */
+  border-color: #007bff; /* Optional: Match border color on hover */
+  text-decoration: none; /* Prevent underline */
+}
