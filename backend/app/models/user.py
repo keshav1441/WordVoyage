@@ -12,9 +12,11 @@ def user_helper(user) -> dict:
     
 def token_helper(token_data: dict):
     return {
+        "userid": token_data.get("userid"),
         "access_token": token_data.get("access_token"),
-        "token_type": token_data.get("token_type", "bearer")  # Default to "bearer" if not provided
+        "token_type": token_data.get("token_type", "bearer"),
     }
+
 
 class Users:
     def __init__(self, name: str, email: str):

@@ -1,3 +1,10 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .form {
   --input-focus: #2d8cf0;
   --font-color: #323232;
@@ -14,14 +21,15 @@
   border-radius: 5px;
   border: 2px solid var(--main-color);
   box-shadow: 4px 4px var(--main-color);
-  width: 320px;
+  max-width: 500px;
+  max-height: 600px;
 }
 
 .title {
   color: var(--font-color);
   font-weight: 900;
   font-size: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .title span {
@@ -31,7 +39,8 @@
 }
 
 .input {
-  width: 250px;
+  margin: 0 2px 0 2px;
+  width: 290px;
   height: 40px;
   border-radius: 5px;
   border: 2px solid var(--main-color);
@@ -85,7 +94,7 @@
 }
 
 .button-confirm {
-  margin: 50px auto 0 auto;
+  margin: 30px auto 0 auto;
   width: 120px;
   height: 40px;
   border-radius: 5px;
@@ -96,4 +105,17 @@
   font-weight: 600;
   color: var(--font-color);
   cursor: pointer;
+}
+
+.alert-container{
+  z-index: 1;
+}
+.alert {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.alert.alert-danger,
+.alert.alert-success {
+  opacity: 1;
 }

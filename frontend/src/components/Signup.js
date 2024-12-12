@@ -30,122 +30,95 @@ const Signup = () => {
     
       if (response.ok) {
         const result = await response.json();
-        const access_token = result.access_token; // Access token should be in the response data
+        console.log(result); // Debug: Ensure `userid` is in the response
     
-        // Assuming 'window.putData' is intended to store the token (corrected to 'window.localStorage' or other method)
-        window.localStorage.setItem("access_token", access_token); // Example: storing in localStorage
+        const access_token = result.access_token;
+        const userId = result.userid; // Extract `userid`
+    
+        if (!userId) {
+            console.error("User ID is undefined in the response!");
+            setError("User ID is missing. Please try again.");
+            return;
+        }
+    
+        // Store the access token
+        window.localStorage.setItem("access_token", access_token);
     
         setSuccessMessage(result.message || "Signup successful!");
-      } else {
+    
+        // Redirect to the dashboard with the userId
+        window.location.href = `/dashboard/${userId}`;
+    } else {
         const errorResult = await response.json();
+        
         setError(errorResult.message || "An error occurred during signup.");
-      }
-    } catch (error) {
+    }}
+     catch (error) {
       setError("An error occurred while processing the request.");
     }
   };    
 
   return (
-    <section
-      className="vh-100 bg-image"
-      style={{
-        backgroundImage:
-          "url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp')",
-      }}
-    >
-      <div className="mask d-flex align-items-center justify-content-center h-100 gradient-custom-3">
-  <div className="container d-flex justify-content-center align-items-center h-100">
-    <div className="col-12 col-md-8 col-lg-5">
-      <div className="card custom-card">
-        <div className="card-body p-3">
-          <h4 className="text-uppercase text-center mb-3">Sign Up</h4>
-                  {error && <div className="alert alert-danger">{error}</div>}
-                  {successMessage && (
-                    <div className="alert alert-success">{successMessage}</div>
-                  )}
-                  <form onSubmit={handleSubmit}>
-                    <div className="form-outline mb-2">
-                      <label className="form-label" htmlFor="name">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        className="form-control"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-outline mb-2">
-                      <label className="form-label" htmlFor="username">
-                        Username
-                      </label>
-                      <input
-                        type="text"
-                        id="username"
-                        className="form-control"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-outline mb-2">
-                      <label className="form-label" htmlFor="email">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        className="form-control"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-outline mb-2">
-                      <label className="form-label" htmlFor="password">
-                        Password
-                      </label>
-                      <input
-                        type="password"
-                        id="password"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-outline mb-2">
-                      <label className="form-label" htmlFor="repeat-password">
-                        Confirm Password
-                      </label>
-                      <input
-                        type="password"
-                        id="repeat-password"
-                        className="form-control"
-                        value={repeatPassword}
-                        onChange={(e) => setRepeatPassword(e.target.value)}
-                      />
-                    </div>
-                    <div className="d-flex justify-content-center">
-                      <button
-                        type="submit"
-                        className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                      >
-                        Register
-                      </button>
-                    </div>
-                    <p className="text-center text-muted mt-3">
-                      Already have an account?{" "}
-                      <Link to="/login" className="fw-bold">
-                        Login here
-                      </Link>
-                    </p>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
+    <div className="container">
+    <form className="form" onSubmit={handleSubmit}>
+      <div className="title">
+        Welcome,<br />
+        <span>sign up to continue</span>
       </div>
-    </section>
+      <input
+        className="input"
+        name="name"
+        placeholder="Name"
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        className="input"
+        name="username"
+        placeholder="Username"
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        className="input"
+        name="email"
+        placeholder="Email"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        className="input"
+        name="password"
+        placeholder="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <input
+        className="input"
+        name="repeat-password"
+        placeholder="Confirm Password"
+        type="password"
+        value={repeatPassword}
+        onChange={(e) => setRepeatPassword(e.target.value)}
+      />
+      <div className="alert-container">
+  {error && <div className="alert alert-danger">{error}</div>}
+  {successMessage && <div className="alert alert-success">{successMessage}</div>}
+</div>
+
+      <button type="submit" className="button-confirm">
+        Let's go →
+      </button>
+
+      <p className="text-center text-muted mt-2">
+        Already have an account? <Link to="/login" className="fw-bold">Login here</Link>
+      </p>
+    </form>
+    </div>
   );
 };
 

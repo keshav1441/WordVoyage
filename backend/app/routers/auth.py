@@ -56,9 +56,17 @@ async def create_user(user: UserCreate):
     
     # After creating the user, generate and return the access token
     token = await login_for_access_token(OAuth2PasswordRequestForm(username=user.username, password=user.password))
+    
+    # Debug: Print the token_helper response
+    response = token_helper({
+        "access_token": token,
+        "token_type": "bearer",
+        "userid": str(created_user["_id"]),  # Ensure `_id` is converted to a string
+    })
+    print("Generated Token Helper Response:", response)  # Debugging
+    return response
 
-    return token_helper({"access_token": token, "token_type": "bearer"})
-
+    
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm):
     user = await authenticate_user(form_data.username, form_data.password)
     if not user:
@@ -66,11 +74,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
         )
-    token = create_access_token(user["username"], user["email"], timedelta(minutes=30))
-    
-    # Print the token
-    print(f"Generated Token: {token}")  # This will print the token to the console
-
+    token = create_access_token(user["username"], user["password"], timedelta(minutes=30))
     return token
 
 
@@ -82,8 +86,8 @@ async def authenticate_user(username: str, password: str):
         return False
     return user
 
-def create_access_token(username: str, email: str, expires_delta: timedelta):
-    to_encode = {"sub": username, "email": email}
+def create_access_token(username: str, password: str, expires_delta: timedelta):
+    to_encode = {"sub": username, "password": password}
     expire = datetime.utcnow() + expires_delta
     to_encode = {**to_encode, "exp": expire}  # Merge dictionaries without using .update()
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)

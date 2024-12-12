@@ -1,76 +1,175 @@
+/* Feature.css */
+
+/* Wrapper for the carousel */
+.feature-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; 
+}
+
+/* Carousel container */
+.carousel {
+  width: auto; /* Dynamically adjust width based on content */
+  max-width: 70%; /* Ensure it doesn't exceed 70% of the container */
+  height: auto; /* Maintain the aspect ratio */
+  margin: 0 auto; /* Center the carousel horizontally */
+  border-radius: 15px; /* Add rounded corners */
+  overflow: hidden; /* Ensure content inside respects the rounded edges */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Carousel image */
+.carousel-item img {
+  position: relative;
+  width: 100%;
+  height: auto; /* Maintain the image's aspect ratio */
+}
+
+/* Gradient overlay effect on images */
+.carousel-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 80%, rgba(97, 97, 97, 0.2)),
+              linear-gradient(to right, rgba(0, 0, 0, 0) 90%, rgba(97, 97, 97, 0.2));
+  z-index: 1; /* Ensure the gradient appears above the image */
+  pointer-events: none; /* Allow interaction with carousel controls */
+}
+
+/* Carousel caption styling */
+.carousel-caption {
+  position: absolute;
+  bottom: 15%;
+  left: 5%; /* Align to the left */
+  z-index: 2; /* Ensure it appears above the gradient */
+  text-align: left; /* Left-aligned text */
+  color: white;
+}
+
+/* Heading style inside carousel caption */
+.carousel-caption h5 {
+  font-size: 1.5rem; /* Larger title */
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: left; /* Left align the heading */
+}
+
+/* Paragraph style inside carousel caption */
+.carousel-caption p {
+  font-size: 1rem; /* Standard font size */
+  margin-bottom: 1rem;
+  text-align: left; /* Left align the paragraph */
+}
+
+/* Featured badge styling */
+.carousel-caption .featured-badge {
+  position: absolute;
+  top: -10%; /* Position above the caption */
+  left: 5%; /* Align to the left */
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* Responsive adjustments */
+
+/* For large screens (Desktop) */
+@media (min-width: 1200px) {
+  .feature-wrapper{
+    margin-top: 3rem;
+  }
 
 
-
-
-  .feature-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh; /* Adjust height to fit the viewport below the navbar */
-    background-color: azure;
-  }
-  
-  .carousel {
-    width: auto; /* Dynamically adjust width based on content */
-    max-width: 60%; /* Ensure it doesn't exceed 60% of the container */
-    height: auto; /* Maintain the aspect ratio */
-    margin: 0 auto; /* Center the carousel horizontally */
-    border-radius: 15px; /* Add rounded corners */
-    overflow: hidden; /* Ensure content inside respects the rounded edges */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .carousel-item img {
-    position: relative;
-    width: 100%;
-    height: auto; /* Maintain the image's aspect ratio */
-  }
-  
-  .carousel-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 80%, rgba(97, 97, 97, 0.2)),
-                linear-gradient(to right, rgba(0, 0, 0, 0) 90%, rgba(97, 97, 97, 0.2));
-    z-index: 1; /* Ensure the gradient appears above the image */
-    pointer-events: none; /* Allow interaction with carousel controls */
-  }
-  
-  .carousel-caption {
-    position: absolute;
-    bottom: 15%;
-    left: 5%; /* Align to the left */
-    z-index: 2; /* Ensure it appears above the gradient */
-    text-align: left; /* Left-aligned text */
-    color: white;
-  }
-  
   .carousel-caption h5 {
-    font-size: 1.5rem; /* Larger title */
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-align: left; /* Left align the heading */
+    font-size: 1.8rem; /* Increase the font size for large screens */
   }
-  
+
   .carousel-caption p {
-    font-size: 1rem; /* Standard font size */
-    margin-bottom: 1rem;
-    text-align: left; /* Left align the paragraph */
+    font-size: 1.1rem; /* Slightly increase paragraph font size */
   }
-  
+
   .carousel-caption .featured-badge {
-    position: absolute;
-    top: -10%; /* Position above the caption */
-    left: 5%; /* Align to the left */
-    /* background-color: rgba(0, 0, 0, 0.6); Semi-transparent background */
-    color: white;
-    font-size: 0.9rem;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    text-transform: uppercase;
+    font-size: 1rem; /* Adjust the badge font size */
   }
-  
+}
+
+/* For medium screens (Tablets) */
+@media (max-width: 1050px) and (min-width: 768px) {
+  .carousel {
+    max-width: 90%; /* Carousel takes 90% of the container width */
+  }
+
+  .carousel-caption h5 {
+    font-size: 1.6rem; /* Adjust heading font size */
+  }
+
+  .carousel-caption p {
+    font-size: 1.05rem; /* Adjust paragraph font size */
+  }
+
+  .carousel-caption .featured-badge {
+    font-size: 0.9rem; /* Adjust badge font size */
+  }
+}
+
+/* For small screens (Mobile) */
+@media (max-width: 650px) {
+
+  .carousel {
+    max-width: 90%; /* Carousel takes 100% of the container width */
+  }
+
+  .carousel-caption {
+    bottom: 10%; /* Move the caption up a bit */
+    left: 3%; /* Adjust left alignment */
+  }
+
+  .carousel-caption h5 {
+    font-size: 1.4rem; /* Adjust heading font size */
+  }
+
+  .carousel-caption p {
+    font-size: 0.95rem; /* Adjust paragraph font size */
+  }
+
+  .carousel-caption .featured-badge {
+    font-size: 0.8rem; /* Adjust badge font size */
+    padding: 0.4rem 0.8rem; /* Adjust padding for smaller screens */
+  }
+}
+
+/* For extra small screens (Mobile landscape or very small screens) */
+@media (max-width: 480px) {
+  .feature-wrapper {
+    height: 45vh; /* Further reduce height for smaller devices */
+  }
+
+  .carousel {
+    max-width: 100%; /* Carousel takes full width */
+  }
+
+  .carousel-caption {
+    bottom: 5%; /* Move caption even closer to the bottom */
+    left: 2%; /* Adjust left margin */
+  }
+
+  .carousel-caption h5 {
+    font-size: 1.2rem; /* Further adjust heading font size */
+  }
+
+  .carousel-caption p {
+    font-size: 0.9rem; /* Further adjust paragraph font size */
+  }
+
+  .carousel-caption .featured-badge {
+    font-size: 0.7rem; /* Adjust badge font size */
+    padding: 0.3rem 0.6rem; /* Adjust padding for extra small screens */
+  }
+}
